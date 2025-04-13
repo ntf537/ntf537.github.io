@@ -1,69 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-
-<body>
+  <!-- </head> -->
+  <body>
     <header>
-
+      <div class="header-container">
+        <p class="text-1">Список дел</p>
+        <section class="menu-right">
+          <section class="weather">
+            <p class="weather-text" id="temp">weather-text</p>
+            <img src="null-img" alt="" class="weather-img" id="icon" />
+          </section>
+          <section class="exch-rate">
+            <p class="rate-text" id="rate"></p>
+            <img src="dollar.png" alt="" class="rate-img" />
+          </section>
+        </section>
+      </div>
     </header>
-    <h1 id="title">Амурский тигр</h1>
-    <nav>
-        <ul>
-            <li><a href="#about">О тигре</a></li>
-            <li><a href="#habitat">Среда обитания</a></li>
-            <li><a href="#conservation">Охрана</a></li>
-        </ul>
-    </nav>
-
     <main>
-        <section id="about">
-            <h2>О тигре</h2>
-            <article>
-                <p>Амурский тигр — один из самых крупных представителей семейства кошачьих. Он обитает в основном на
-                    Дальнем Востоке России. Дикая кошка весит 180-300 кг, имеет длину тела 1,5-2 м и длину хвоста –
-                    1-1,15 м. Крупнейший амурский тигр обладал массой 384 кг. Тигрицы на четверть мельче самцов.
+      <div class="container">
+        <dialog class="confirm-window" id="confirm-of-delete">
+          <div
+            role="confirm"
+            aria-modal="true"
+            class="inside-window"
+          >
+            <p id="confirm-text">Вы уверены, что хотите удалить задачу?</p>
 
-                    Прирожденные охотники имеют развитое телосложение и широкие сильные лапы. Амурские тигры легко
-                    совершают прыжки в 5-6 м и бегают по снегу со скоростью до 80 км/ч. Они ведут ночной образ жизни,
-                    поэтому тигриное зрение в темноте в 5 раз лучше, чем у человека.</p>
-            </article>
-        </section>
+            <div class="confirm-bottom">
+              <button id="confirm-yes-button">Да</button>
+              <button id="confirm-exit-button">Выйти</button>
+            </div>
+          </div>
+        </dialog>
 
-        <section id="habitat">
-            <h2>Среда обитания</h2>
-            <article>
-                <p>Раньше тигры водились на Кавказе, побережье Каспийского моря и в Казахстане, но там они давно были
-                    уничтожены охотниками. Кроме того, хищники оказались лишены пропитания, поскольку практически не
-                    осталось копытных, на которых они охотились. Последнего тигра в этих регионах видели в 1958 году.
-                    Теперь амурского тигра можно встретить только на востоке России. Крупные дикие кошки живут в
-                    Хабаровском крае – в долинах Амура и Уссури. Более 20 животных обитает в Еврейской автономной
-                    области, а самое большое количество – в отрогах Сихотэ-Алиня, на территории Приморского края.
+        <dialog class="errors-window" id="errors-notification">
+          <div
+            role="error-notification"
+            aria-modal="true"
+            class="inside-window"
+          >
+            <p id="error-text"></p>
+            <button id="error-exit-button">OK</button>
+          </div>
+        </dialog>
+        <dialog class="add-task-window" id="add-task-dialog">
+          <div
+            role="add-task"
+            aria-labelledby="dialog-add"
+            aria-modal="true"
+            class="inside-window"
+          >
+            <p class="title-of-add-window">Добавление <br> задачи</p>
 
-                </p>
-            </article>
-        </section>
+            <div class="get-information">
+              <form class="get-task-title-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите название дела:</p>
+                  <input type="text" class="input-text" id="get-task-title" />
+                </div>
+              </form>
 
-        <section id="conservation">
-            <h2>Охрана</h2>
-            <article>
-                <p>Варварское истребление привело к тому, что к 1930-м годам осталось менее 30 особей. В 1947 году на
-                    дальневосточного хищника запретили охотиться. За 90 лет популяция амурского тигра выросла в 20 раз.
-                    В 2021 году в России обитало около 550 особей. Тем не менее амурский тигр остается редким животным,
-                    встретить которого в природе – большая удача.</p>
-            </article>
-        </section>
+              <form class="get-task-description-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите описание дела:</p>
+                  <input
+                    type="text"
+                    class="input-text"
+                    id="get-task-description"
+                  />
+                </div>
+              </form>
+
+              <form class="get-task-deadline-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите дедлайн дела (YYYY-MM-DD):</p>
+                  <input
+                    type="text"
+                    class="input-text"
+                    id="get-task-deadline"
+                  />
+                </div>
+              </form>
+
+              <form class="get-task-tags-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите теги дела:</p>
+                  <input type="text" class="input-text" id="get-task-tags" />
+                </div>
+              </form>
+
+              <form class="get-task-deadline-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите статус дела:</p>
+                  <input type="text" class="input-text" id="get-task-status" />
+                </div>
+              </form>
+            </div>
+
+            <div class="save-and-exit">
+              <button class="task-save" id="add-task-save-button">Сохранить</button>
+              <button class="task-exit">Выйти</button>
+            </div>
+          </div>
+        </dialog>
+
+        <dialog class="add-task-window" id="edit-task-dialog">
+          <div
+            role="edit-task"
+            aria-labelledby="dialog-edit"
+            aria-modal="true"
+            class="inside-window"
+          >
+            <p class="title-of-add-window">Редактирование <br> задачи</p>
+
+            <div class="get-information">
+              <form class="get-task-title-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите название дела:</p>
+                  <input type="text" class="input-text" id="edit-task-title" />
+                </div>
+              </form>
+
+              <form class="get-task-description-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите описание дела:</p>
+                  <input
+                    type="text"
+                    class="input-text"
+                    id="edit-task-description"
+                  />
+                </div>
+              </form>
+
+              <form class="get-task-deadline-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите дедлайн дела (YYYY-MM-DD):</p>
+                  <input
+                    type="text"
+                    class="input-text"
+                    id="edit-task-deadline"
+                  />
+                </div>
+              </form>
+
+              <form class="get-task-tags-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите теги дела:</p>
+                  <input type="text" class="input-text" id="edit-task-tags" />
+                </div>
+              </form>
+
+              <form class="get-task-deadline-form">
+                <div class="input-form">
+                  <p class="dialog-text">Введите статус дела:</p>
+                  <input type="text" class="input-text" id="edit-task-status" />
+                </div>
+              </form>
+            </div>
+
+            <div class="save-and-exit">
+              <button class="task-save" id="edit-task-save-button">Сохранить</button>
+              <button class="task-exit">Выйти</button>
+            </div>
+          </div>
+        </dialog>
+        <div class="filter-cards">
+          <div class="select-menu" id="select">
+            <p class="filter-text">Отсортировать по:</p>
+            <select class="select-menu" id="select-element">
+              <option value="DATE_OF_CREATION">Дате создания</option>
+              <option value="ALPHABET">Алфавиту</option>
+              <option value="STATUS">Статусу</option>
+            </select>  
+            <button id="sort-button">Отсортировать</button>
+          </div>
+          <button class="task-add" id="add-button"></button>
+          <div class="filter-menu">
+            <p class="filter-text">Фильтрация по:</p>
+            <div class="filter-checkboxes">
+              <div class="checkbox-and-text">
+                <input type="checkbox" class="checkbox-input" id="status-checkbox">
+                <input type="text" class="input-text" id="get-status-for-filter">
+                <p class="filter-text">Статусу</p>
+              </div>
+              <div class="checkbox-and-text">
+                <input type="checkbox" class="checkbox-input" id="date-checkbox">
+                <input type="text" class="input-text" id="get-date-for-filter">
+                <p class="filter-text">Дате создания (YYYY-MM-DD)</p>
+              </div>
+              <div class="checkbox-and-text">
+                <input type="checkbox" class="checkbox-input" id="deadline-checkbox">
+                <input type="text" class="input-text" id="get-deadline-for-filter">
+                <p class="filter-text">Деадлайну</p>
+              </div>
+            </div>
+            <div class="filter-and-show">
+              <button id="filter-button">Отфильтровать</button>
+              <button id="show-all">Показать все</button>
+            </div>
+          </div>
+          
+        </div>
+        <ul class="to-do-list" id="cards-list-ul">
+          <!-- <li class="to-do-list-li">
+            <div class="card" id=>
+              <p class="id-card-value">id</p>
+              <p class="task-title">Название</p>
+              <p class="task-desc">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil
+                quidem quisquam quos esse iusto delectus porro eum tempora nisi,
+                quibusdam aspernatur odit voluptate facilis, earum fugiat.
+                Tempora temporibus eaque sit!
+              </p>
+              <div class="task-tag">
+                <p class="task-tag-text">#писятдва</p>
+              </div>
+              <div class="card-bottom">
+                <button class="task-edit"></button>
+                <button class="task-delete"></button>
+                <div class="task-status">
+                  <p class="task-status-text">Не выполнено</p>
+                </div>
+                <p class="task-deadline">2025-01-15</p>
+              </div>
+            </div>
+          </li> -->
+        </ul>
+      </div>
     </main>
-
-    <footer>
-        <p>Ⓒ 2024 Все права защищены. Контакты: +375295364309</p>
-    </footer>
-
-</body>
-
+  </body>
+  <script src="script.js"></script>
 </html>
