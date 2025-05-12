@@ -13,10 +13,9 @@
  */
 function dateOfCreationSort()
 {
-  let sortedArr = [];
   let unsortedArr = JSON.parse(localStorage.getItem("cards"));
 
-  sortedArr = unsortedArr.sort((a, b) => {
+  let sortedArr = unsortedArr.sort((a, b) => {
     if (a.createdAt < b.createdAt) {
       return -1;
     }

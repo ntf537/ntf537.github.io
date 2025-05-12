@@ -40,10 +40,7 @@ const errorExitButton = document.getElementById("error-exit-button")
 const exitButtons = document.getElementsByClassName("task-exit");
 const editButtons = document.getElementsByClassName("task-edit");
 
-const dialogAddWindow = document.getElementById("add-task-dialog");
-const dialogEditWindow = document.getElementById("edit-task-dialog");
-const errorsWindow = document.getElementById("errors-notification")
-const confirmWindow = document.getElementById("confirm-of-delete");
+const errorsWindow = document.getElementById("errors-notification");
 
 const inputTitle = document.getElementById("get-task-title");
 const inputDesc = document.getElementById("get-task-description");
@@ -59,10 +56,6 @@ const editStatus = document.getElementById("edit-task-status");
 
 const titles = document.getElementsByClassName("task-title");
 
-/* function addFunc(element, fn) {
-  element.addEventListener("click", fn);
-} */
-
 let MyCards = new Cards();
 
 saveAddButton.addEventListener("click", onSaveAddClick);
@@ -77,9 +70,9 @@ showAllButton.addEventListener("click", showAllCards);
 sortButton.addEventListener("click", onSortClick);
 filterButton.addEventListener("click", onFilterClick);
 
-/* Array.prototype.forEach.call(exitButtons, function(element) 
+Array.prototype.forEach.call(exitButtons, function(element) 
 {
   element.addEventListener("click", onExitClick);
 });
- */
+ 
 

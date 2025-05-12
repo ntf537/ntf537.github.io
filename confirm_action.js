@@ -11,6 +11,8 @@
  * // Использование для запроса подтверждения перед удалением:
  * deleteButton.addEventListener('click', confirmAction);
  */
+const confirmWindow = document.getElementById("confirm-of-delete");
+
 function confirmAction()
 {
   confirmWindow.showModal();

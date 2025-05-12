@@ -11,6 +11,8 @@
  * // Использование как обработчика нажатия кнопки "Добавить":
  * addButton.addEventListener('click', onAddClick);
  */
+ const dialogAddWindow = document.getElementById("add-task-dialog");
+ 
 function onAddClick() {
     dialogAddWindow.showModal();
 }

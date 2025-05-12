@@ -26,7 +26,7 @@
 
 function checkValidation(condition)
 {
-  if(condition == "FOR_ADD")
+  if(condition === "FOR_ADD")
   {
     if(inputTitle.value.trim().length != 0 && inputDesc.value.trim().length != 0 && inputDeadline.value.trim().length != 0 && inputTags.value.trim().length != 0 && inputStatus.value.trim().length !=0)
     {

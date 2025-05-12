@@ -21,6 +21,7 @@ function onSortClick()
   }
   else if(selectList.value === "STATUS")
   {
+    debugger
     statusSort();
   } 
   else if(selectList.value === "DATE_OF_CREATION")

@@ -11,12 +11,10 @@
  * // Для сортировки карточек по алфавиту:
  * alphabetSort();
  */
-function alphabetSort()
-{
-  let sortedArr = [];
+ function alphabetSort() {
   let unsortedArr = JSON.parse(localStorage.getItem("cards"));
 
-  sortedArr = unsortedArr.sort((a, b) => {
+  let sortedArr = unsortedArr.sort((a, b) => {
     if (a.title.trim().toLowerCase() < b.title.trim().toLowerCase()) {
       return -1;
     }
@@ -24,7 +22,7 @@ function alphabetSort()
       return 1;
     }
     return 0;
-  })
+  });
 
   renderSortedCards(sortedArr);
 }

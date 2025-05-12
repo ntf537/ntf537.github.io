@@ -12,6 +12,8 @@
  * // Использование как обработчика нажатия кнопки "Редактировать":
  * editButton.addEventListener('click', onEditClick);
  */
+const dialogEditWindow = document.getElementById("edit-task-dialog");
+
 function onEditClick()
 {
   dialogEditWindow.showModal();
