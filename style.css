@@ -358,5 +358,9 @@
   {
       padding: 5px;
   }
+  .card-bottom
+  {
+    gap: 10px;
+  }
   
 }
