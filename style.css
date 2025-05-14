@@ -348,19 +348,10 @@
   .save-and-exit
   {
       width: 300px;
-      
   }
-  .card
-  {
-      width: 350px;
-  }
+
   .container
   {
       padding: 5px;
   }
-  .card-bottom
-  {
-    gap: 0p;
-  }
-  
 }
