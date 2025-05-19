@@ -1,264 +1,357 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>To-do list</title>
-  <body>
-    <header>
-      <div class="header-container">
-        <p class="text-1">Список дел</p>
-        <section class="menu-right">
-          <section class="weather">
-            <p class="weather-text" id="temp">weather-text</p>
-            <img src="null-img" alt="" class="weather-img" id="icon" />
-          </section>
-          <section class="exch-rate">
-            <p class="rate-text" id="rate"></p>
-            <img src="dollar.png" alt="" class="rate-img" />
-          </section>
-        </section>
-      </div>
-    </header>
-    <main>
-      <div class="container">
-        <dialog class="confirm-window" id="confirm-of-delete">
-          <div
-            role="confirm"
-            aria-modal="true"
-            class="inside-window"
-          >
-            <p id="confirm-text">Вы уверены, <br> что хотите удалить задачу?</p>
+* {
+  margin: 0;
+  padding: 0;
+}
 
-            <div class="confirm-bottom">
-              <button id="confirm-yes-button">Да</button>
-              <button id="confirm-exit-button">Выйти</button>
-            </div>
-          </div>
-        </dialog>
+.header-container {
+  display: flex;
+  min-height: 100px;
+  background-image: radial-gradient(#3cb371, #2e8b57);
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+}
 
-        <dialog class="errors-window" id="errors-notification">
-          <div
-            role="error-notification"
-            aria-modal="true"
-            class="inside-window"
-          >
-            <p id="error-text"></p>
-            <button id="error-exit-button">OK</button>
-          </div>
-        </dialog>
-        <dialog class="add-task-window" id="add-task-dialog">
-          <div
-            role="add-task"
-            aria-labelledby="dialog-add"
-            aria-modal="true"
-            class="inside-window"
-          >
-            <p class="title-of-add-window">Добавление <br> задачи</p>
+.weather,
+.exch-rate {
+  display: flex;
+  flex-direction: row;
+}
 
-            <div class="get-information">
-              <form class="get-task-title-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите название дела:</p>
-                  <input type="text" class="input-text" id="get-task-title" />
-                </div>
-              </form>
+.menu-right {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
 
-              <form class="get-task-description-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите описание дела:</p>
-                  <input
-                    type="text"
-                    class="input-text"
-                    id="get-task-description"
-                  />
-                </div>
-              </form>
+.rate-img,
+.weather-img {
+  width: 45px;
+  height: 45px;
+}
 
-              <form class="get-task-deadline-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите дедлайн дела (YYYY-MM-DD):</p>
-                  <input
-                    type="text"
-                    class="input-text"
-                    id="get-task-deadline"
-                  />
-                </div>
-              </form>
+.text-1,
+.weather-text,
+.rate-text {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+}
 
-              <form class="get-task-tags-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите теги дела:</p>
-                  <input type="text" class="input-text" id="get-task-tags" />
-                </div>
-              </form>
+.container {
+  min-height: 1000px;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #2ecc71;
+}
 
-              <form class="get-task-deadline-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите статус дела:</p>
-                  <input type="text" class="input-text" id="get-task-status" />
-                </div>
-              </form>
-            </div>
+.card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  width: 360px;
+  height: 325px;
+  background-color: #3498db;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
-            <div class="save-and-exit">
-              <button class="task-save" id="add-task-save-button">Сохранить</button>
-              <button class="task-exit">Выйти</button>
-            </div>
-          </div>
-        </dialog>
+.task-desc,
+.task-title,
+.task-deadline,
+.task-tag-text,
+.task-status-text,
+.title-of-add-window,
+#error-text,
+#confirm-text,
+.filter-text {
+  font-family: Arial, sans-serif;
+  word-break: break-all;
+}
 
-        <dialog class="add-task-window" id="edit-task-dialog">
-          <div
-            role="edit-task"
-            aria-labelledby="dialog-edit"
-            aria-modal="true"
-            class="inside-window"
-          >
-            <p class="title-of-add-window">Редактирование <br> задачи</p>
+.filter-text
+{
+  font-size: 18px;
+  font-weight: 700;
+  color: #333333;
+}
 
-            <div class="get-information">
-              <form class="get-task-title-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите название дела:</p>
-                  <input type="text" class="input-text" id="edit-task-title" />
-                </div>
-              </form>
+.task-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333333;
+}
 
-              <form class="get-task-description-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите описание дела:</p>
-                  <input
-                    type="text"
-                    class="input-text"
-                    id="edit-task-description"
-                  />
-                </div>
-              </form>
+.task-desc {
+  font-size: 16px;
+  color: #333333;
+}
 
-              <form class="get-task-deadline-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите дедлайн дела (YYYY-MM-DD):</p>
-                  <input
-                    type="text"
-                    class="input-text"
-                    id="edit-task-deadline"
-                  />
-                </div>
-              </form>
+.task-deadline {
+  font-size: 14px;
+  color: #999999;
+  align-self: flex-end;
+  font-weight: 700;
+}
 
-              <form class="get-task-tags-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите теги дела:</p>
-                  <input type="text" class="input-text" id="edit-task-tags" />
-                </div>
-              </form>
+.task-tag {
+  background-color: #2ecc71;
+  height: 20px;
+  border-radius: 3px;
+}
 
-              <form class="get-task-deadline-form">
-                <div class="input-form">
-                  <p class="dialog-text">Введите статус дела:</p>
-                  <input type="text" class="input-text" id="edit-task-status" />
-                </div>
-              </form>
-            </div>
+.task-tag-text {
+  color: #ffffff;
+}
 
-            <div class="save-and-exit">
-              <button class="task-save" id="edit-task-save-button">Сохранить</button>
-              <button class="task-exit">Выйти</button>
-            </div>
-          </div>
-        </dialog>
-        <div class="filter-cards">
-          <div class="select-menu" id="select">
-            <p class="filter-text">Отсортировать по:</p>
-            <select class="select-menu" id="select-element">
-              <option value="DATE_OF_CREATION">Дате создания</option>
-              <option value="ALPHABET">Алфавиту</option>
-              <option value="STATUS">Статусу</option>
-            </select>  
-            <button id="sort-button">Отсортировать</button>
-          </div>
-          <button class="task-add" id="add-button"></button>
-          <div class="filter-menu">
-            <p class="filter-text">Фильтрация по:</p>
-            <div class="filter-checkboxes">
-              <div class="checkbox-and-text">
-                <input type="checkbox" class="checkbox-input" id="status-checkbox">
-                <input type="text" class="input-text" id="get-status-for-filter">
-                <p class="filter-text">Статусу</p>
-              </div>
-              <div class="checkbox-and-text">
-                <input type="checkbox" class="checkbox-input" id="date-checkbox">
-                <input type="text" class="input-text" id="get-date-for-filter">
-                <p class="filter-text">Дате создания (YYYY-MM-DD)</p>
-              </div>
-              <div class="checkbox-and-text">
-                <input type="checkbox" class="checkbox-input" id="deadline-checkbox">
-                <input type="text" class="input-text" id="get-deadline-for-filter">
-                <p class="filter-text">Деадлайну</p>
-              </div>
-            </div>
-            <div class="filter-and-show">
-              <button id="filter-button">Отфильтровать</button>
-              <button id="show-all">Показать все</button>
-            </div>
-          </div>
-          
-        <!-- </div> -->
-        <ul class="to-do-list" id="cards-list-ul">
-          <!-- <li class="to-do-list-li">
-            <div class="card" id=>
-              <p class="id-card-value">id</p>
-              <p class="task-title">Название</p>
-              <p class="task-desc">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil
-                quidem quisquam quos esse iusto delectus porro eum tempora nisi,
-                quibusdam aspernatur odit voluptate facilis, earum fugiat.
-                Tempora temporibus eaque sit!
-              </p>
-              <div class="task-tag">
-                <p class="task-tag-text">#писятдва</p>
-              </div>
-              <div class="card-bottom">
-                <button class="task-edit"></button>
-                <button class="task-delete"></button>
-                <div class="task-status">
-                  <p class="task-status-text">Не выполнено</p>
-                </div>
-                <p class="task-deadline">2025-01-15</p>
-              </div>
-            </div>
-          </li> -->
-        </ul>
-      </div>
-    </main>
-  </body>
-  <script src="tag_conversion.js"></script>
-  <script src="class_Card.js"></script>
-  <script src="delete_card.js"></script>
-  <script src="class_Cards.js"></script>
-  <script src="get_now_time.js"></script>
-  <script src="fetch_weather_data.js"></script>
-  <script src="render_weather_data.js"></script>
-  <script src="fetch_rate_data.js"></script>
-  <script src="render_rate_data.js"></script>
-  <script src="add_click.js"></script>
-  <script src="check_validation.js"></script>
-  <script src="confirm_action.js"></script>
-  <script src="save_add_click.js"></script>
-  <script src="save_edit_click.js"></script>
-  <script src="edit_click.js"></script>
-  <script src="exit_click.js"></script>
-  <script src="render_sorted_cards.js"></script>
-  <script src="alphabet_sort.js"></script>
-  <script src="status_sort.js"></script>
-  <script src="date_of_creation_sort.js"></script>
-  <script src="sort_click.js"></script>
-  <script src="filter_cards.js"></script>
-  <script src="filter_click.js"></script>
-  <script src="show_all_cards.js"></script>
-  <script src="init.js"></script>
-  <script src="script.js"></script>
-</html>
+.task-status {
+  background-color: #ff7f50;
+  height: 20px;
+  border-radius: 3px;
+}
+
+.task-status-text {
+  color: #ffffff;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.task-edit,
+.task-delete {
+  width: 30px;
+  height: 30px;
+}
+
+.task-edit {
+  background-image: url(card-buttons/edit-button-img.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  height: 30px;
+}
+
+.task-delete {
+  background-image: url(card-buttons/delete-button-img.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  height: 38px;
+}
+
+.task-add {
+  background-image: url(card-buttons/add-button-img.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  width: 45px;
+  height: 45px;
+}
+
+.to-do-list {
+  margin-top: 15px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.get-information {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-task-window {
+  align-items: center; 
+  max-width: 475px;
+  background-color: #f5f5f5;
+  margin: auto auto;
+  border-radius: 20px;
+  border-color: #f39c12;
+  background-color: #f39c12;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.input-text {
+  border: none;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.inside-window {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  
+}
+
+.save-and-exit {
+  width: 475px;
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-around;
+}
+
+.confirm-bottom
+{
+  width: 340px;
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-around;
+}
+
+.task-save,
+.task-exit,
+#error-exit-button,
+#confirm-yes-button,
+#confirm-exit-button,
+#filter-button,
+#sort-button,
+#show-all {
+  align-items: center;
+  background-color: #0a66c2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.title-of-add-window
+{
+  font-size: 35px;
+  font-weight: 700;
+}
+
+#error-text
+{
+  color: #ffff;
+}
+
+.errors-window,
+.confirm-window
+{
+  align-items: center; 
+  max-width: 350px;
+  background-color: #f5f5f5;
+  margin: auto auto;
+  border-radius: 20px;
+  border-color: #e74c3c;
+  background-color: #e74c3c;
+}
+
+.id-card-value
+{
+  display: none;
+}
+
+.filter-cards
+{
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.select-menu
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.select
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-menu
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-checkboxes
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.checkbox-and-text
+{
+  display: flex;
+  gap: 5px;
+}
+
+.filter-and-show
+{
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 800px) {
+  .header-container, .filter-cards
+  {
+      flex-direction: column;
+      align-items: center;
+  }
+  .filter-text
+  {
+      font-size: 14px;
+  }
+  .add-task-window,.confirm-window,.errors-window
+  {
+      flex-direction: column;
+      min-width: 310px;
+      min-height: 320px;
+  }
+  .save-and-exit
+  {
+      width: 310px;
+  }
+
+  .container
+  {
+      padding: 5px;
+  }
+}
